@@ -21,6 +21,7 @@ char const * live_public_key_data = "E89208DD038FBB269987689621D52292AE9C35941A7
 //char const * dcb_public_key_data = "B0311EA55708D6A53C75CDBF88300259C6D018522FE3D4D0A242E431F9E8B6D0"; // xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo
 char const * dcb_public_key_data = "2D494276C4FB0B82E3A81F3E1004B41897408B21E697A884E18AF9310E716C8E"; // xrb_1dcbabuebyrdidjti9sy414da86qa47k5snqo44g54qs86994u6gnpjxm7ga
 
+
 char const * test_genesis_data = R"%%%({
 	"type": "open",
 	"source": "B0311EA55708D6A53C75CDBF88300259C6D018522FE3D4D0A242E431F9E8B6D0",
@@ -48,13 +49,22 @@ char const * live_genesis_data = R"%%%({
 	"signature": "9F0C933C8ADE004D808EA1985FA746A7E95BA2A38F867640F53EC8F180BDFE9E2C1268DEAD7C2664F356E37ABA362BC58E46DBA03E523A7B5A19E4B6EB12BB02"
 })%%%";
 
+// char const * dcb_alpha_genesis_data = R"%%%({
+// 	"type": "open",
+// 	"source": "B0311EA55708D6A53C75CDBF88300259C6D018522FE3D4D0A242E431F9E8B6D0",
+// 	"representative": "xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo",
+// 	"account": "xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo",
+// 	"work": "9680625b39d3363d",
+// 	"signature": "ECDA914373A2F0CA1296475BAEE40500A7F0A7AD72A5A80C81D7FAB7F6C802B2CC7DB50F5DD0FB25B2EF11761FA7344A158DD5A700B21BD47DE5BD0F63153A02"
+// })%%%";
+
 char const * dcb_alpha_genesis_data = R"%%%({
 	"type": "open",
-	"source": "0000000000000000000000000000000000000000000000000000000000000000",
+	"source": "2D494276C4FB0B82E3A81F3E1004B41897408B21E697A884E18AF9310E716C8E",
 	"representative": "xrb_1dcbabuebyrdidjti9sy414da86qa47k5snqo44g54qs86994u6gnpjxm7ga",
 	"account": "xrb_1dcbabuebyrdidjti9sy414da86qa47k5snqo44g54qs86994u6gnpjxm7ga",
-	"work": "0000000000000000",			 
-	"signature": "ECDA914373A2F0CA1296475BAEE40500A7F0A7AD72A5A80C81D7FAB7F6C802B2CC7DB50F5DD0FB25B2EF11761FA7344A158DD5A700B21BD47DE5BD0F63153A02"
+	"work": "485b1b2b5ab53a0d",			 
+	"signature": "99D3D845135C92042C79F76D2C0A75194882364C876256AD5615A0E735D57C04CC47F9E6E66350CFFA43D13F1CB9AFB004D09268F32E8084EADD0C491A0E5F00"
 })%%%";
 
 class ledger_constants
@@ -73,8 +83,8 @@ public:
 	dcb_alpha_genesis (dcb_alpha_genesis_data),
 	genesis_account (rai::rai_network == rai::rai_networks::dcb_alpha_network ? dcb_alpha_account : rai::rai_network == rai::rai_networks::rai_test_network ? rai_test_account : rai::rai_network == rai::rai_networks::rai_beta_network ? rai_beta_account : rai_live_account),
 	genesis_block (rai::rai_network == rai::rai_networks::dcb_alpha_network ? dcb_alpha_genesis : rai::rai_network == rai::rai_networks::rai_test_network ? rai_test_genesis : rai::rai_network == rai::rai_networks::rai_beta_network ? rai_beta_genesis : rai_live_genesis),
-	// genesis_amount (std::numeric_limits<rai::uint128_t>::max ()),
-	genesis_amount (100000000),
+	genesis_amount (std::numeric_limits<rai::uint128_t>::max ()),
+	
 	burn_account (0)
 	{
 		CryptoPP::AutoSeededRandomPool random_pool;
