@@ -10,6 +10,7 @@ environment:
   matrix:
     - network: rai_live_network
     - network: rai_beta_network
+    - network: dcb_alpha_network
 clone_folder: C:\projects\myproject
 install:
 - cmd: >-

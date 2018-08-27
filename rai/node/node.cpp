@@ -918,6 +918,9 @@ lmdb_max_dbs (128)
 	epoch_block_signer = rai::genesis_account;
 	switch (rai::rai_network)
 	{
+		case rai::rai_networks::dcb_alpha_network:
+			preconfigured_representatives.push_back (rai::genesis_account);
+			break;
 		case rai::rai_networks::rai_test_network:
 			preconfigured_representatives.push_back (rai::genesis_account);
 			break;

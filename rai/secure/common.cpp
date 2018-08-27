@@ -18,6 +18,9 @@ char const * test_private_key_data = "34F0A37AAD20F4A260F0A5B3CB3D7FB50673212263
 char const * test_public_key_data = "B0311EA55708D6A53C75CDBF88300259C6D018522FE3D4D0A242E431F9E8B6D0"; // xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo
 char const * beta_public_key_data = "A59A47CC4F593E75AE9AD653FDA9358E2F7898D9ACC8C60E80D0495CE20FBA9F"; // xrb_3betaz86ypbygpqbookmzpnmd5jhh4efmd8arr9a3n4bdmj1zgnzad7xpmfp
 char const * live_public_key_data = "E89208DD038FBB269987689621D52292AE9C35941A7484756ECCED92A65093BA"; // xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3
+char const * dcb_public_key_data = "B0311EA55708D6A53C75CDBF88300259C6D018522FE3D4D0A242E431F9E8B6D0"; // xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo
+//char const * dcb_public_key_data = "2D494276C4FB0B82E3A81F3E1004B41897408B21E697A884E18AF9310E716C8E"; // xrb_1dcbabuebyrdidjti9sy414da86qa47k5snqo44g54qs86994u6gnpjxm7ga
+
 char const * test_genesis_data = R"%%%({
 	"type": "open",
 	"source": "B0311EA55708D6A53C75CDBF88300259C6D018522FE3D4D0A242E431F9E8B6D0",
@@ -45,6 +48,15 @@ char const * live_genesis_data = R"%%%({
 	"signature": "9F0C933C8ADE004D808EA1985FA746A7E95BA2A38F867640F53EC8F180BDFE9E2C1268DEAD7C2664F356E37ABA362BC58E46DBA03E523A7B5A19E4B6EB12BB02"
 })%%%";
 
+char const * dcb_alpha_genesis_data = R"%%%({
+	"type": "open",
+	"source": "B0311EA55708D6A53C75CDBF88300259C6D018522FE3D4D0A242E431F9E8B6D0",
+	"representative": "xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo",
+	"account": "xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo",
+	"work": "9680625b39d3363d",
+	"signature": "ECDA914373A2F0CA1296475BAEE40500A7F0A7AD72A5A80C81D7FAB7F6C802B2CC7DB50F5DD0FB25B2EF11761FA7344A158DD5A700B21BD47DE5BD0F63153A02"
+})%%%";
+
 class ledger_constants
 {
 public:
@@ -54,11 +66,14 @@ public:
 	rai_test_account (test_public_key_data),
 	rai_beta_account (beta_public_key_data),
 	rai_live_account (live_public_key_data),
+	dcb_alpha_account (dcb_public_key_data),
 	rai_test_genesis (test_genesis_data),
 	rai_beta_genesis (beta_genesis_data),
 	rai_live_genesis (live_genesis_data),
-	genesis_account (rai::rai_network == rai::rai_networks::rai_test_network ? rai_test_account : rai::rai_network == rai::rai_networks::rai_beta_network ? rai_beta_account : rai_live_account),
-	genesis_block (rai::rai_network == rai::rai_networks::rai_test_network ? rai_test_genesis : rai::rai_network == rai::rai_networks::rai_beta_network ? rai_beta_genesis : rai_live_genesis),
+	dcb_alpha_genesis (dcb_alpha_genesis_data),
+	genesis_account (rai::rai_network == rai::rai_networks::dcb_alpha_network ? dcb_alpha_account : rai::rai_network == rai::rai_networks::rai_test_network ? rai_test_account : rai::rai_network == rai::rai_networks::rai_beta_network ? rai_beta_account : rai_live_account),
+	genesis_block (rai::rai_network == rai::rai_networks::dcb_alpha_network ? dcb_alpha_genesis : rai::rai_network == rai::rai_networks::rai_test_network ? rai_test_genesis : rai::rai_network == rai::rai_networks::rai_beta_network ? rai_beta_genesis : rai_live_genesis),
+	// genesis_amount (std::numeric_limits<rai::uint128_t>::max ()),
 	genesis_amount (std::numeric_limits<rai::uint128_t>::max ()),
 	burn_account (0)
 	{
@@ -72,9 +87,11 @@ public:
 	rai::account rai_test_account;
 	rai::account rai_beta_account;
 	rai::account rai_live_account;
+	rai::account dcb_alpha_account;
 	std::string rai_test_genesis;
 	std::string rai_beta_genesis;
 	std::string rai_live_genesis;
+	std::string dcb_alpha_genesis;
 	rai::account genesis_account;
 	std::string genesis_block;
 	rai::uint128_t genesis_amount;
@@ -96,9 +113,11 @@ rai::keypair const & rai::test_genesis_key (globals.test_genesis_key);
 rai::account const & rai::rai_test_account (globals.rai_test_account);
 rai::account const & rai::rai_beta_account (globals.rai_beta_account);
 rai::account const & rai::rai_live_account (globals.rai_live_account);
+rai::account const & rai::dcb_alpha_account (globals.dcb_alpha_account);
 std::string const & rai::rai_test_genesis (globals.rai_test_genesis);
 std::string const & rai::rai_beta_genesis (globals.rai_beta_genesis);
 std::string const & rai::rai_live_genesis (globals.rai_live_genesis);
+std::string const & rai::dcb_alpha_genesis (globals.dcb_alpha_genesis);
 
 rai::account const & rai::genesis_account (globals.genesis_account);
 std::string const & rai::genesis_block (globals.genesis_block);

@@ -13,7 +13,9 @@ enum class rai_networks
 	// Normal work parameters, secret beta genesis key, beta IP ports
 	rai_beta_network,
 	// Normal work parameters, secret live key, live IP ports
-	rai_live_network
+	rai_live_network,
+	// Normal work parameters, secret dcb genesis key, alpha IP ports
+	dcb_alpha_network
 };
 rai::rai_networks const rai_network = rai_networks::ACTIVE_NETWORK;
 std::chrono::milliseconds const transaction_timeout = std::chrono::milliseconds (1000);

@@ -23,6 +23,9 @@ boost::filesystem::path rai::working_path ()
 		case rai::rai_networks::rai_live_network:
 			result /= "RaiBlocks";
 			break;
+		case rai::rai_networks::dcb_alpha_network:
+			result /= "DcbBlocksAlpha";
+			break;
 	}
 	return result;
 }
